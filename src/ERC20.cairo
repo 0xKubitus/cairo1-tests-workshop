@@ -126,7 +126,30 @@ mod ERC20 {
 #[cfg (test)]
 mod tests {
 
+    // The below imports are required in order to be able to produce a u256 from a felt 
+    use integer::u256;
+    use integer::u256_from_felt252;
+
+    use starknet::contract_address_const;
+    use starknet::ContractAddress;
+
+    use super::ERC20; // Here we're importing the module of the contract which is in the same file
+
     #[test]
-    // First, let's test the constructor function
+    #[available_gas(2000000)]
+    fn test_constructor() {
+
+        let initial_supply: u256 = u256_from_felt252(2000);
+        let account: ContractAddress = contract_address_const::<1>();
+        let decimals: u8 = 18_u8;
+
+        let name: felt252 = 'Basecamp_04';
+        let symbol: felt252 = 'BSC04';
+
+
+        ERC20::constructor(name, symbol, decimals, initial_supply, account)
+
+
+    }
 
 }

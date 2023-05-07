@@ -1,0 +1,2 @@
+[crate_roots]
+C_cairo1_tests_workshop = "src"
