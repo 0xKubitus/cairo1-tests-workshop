@@ -1,0 +1,3 @@
+[crate roots]
+basecamp_04_demo = "src"
+tests = "tests"
