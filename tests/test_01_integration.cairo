@@ -37,18 +37,16 @@ fn test_transfer(){
     let amount: u256 = u256_from_felt252(100);
     let balance_recipient = ERC20::balance_of(recipient);
     let sender_balance = ERC20::balance_of(sender);
+    let total_supply_balance = ERC20::get_total_supply();
     
     ERC20::transfer(recipient, amount);
 
     // STEP 1: Verify that the amount of 100 has been transferred to the recipient account
-    assert(ERC20::balance_of(recipient) == balance_recipient + amount, 'ERC20:WRONG BALANCE RECIPIENT');     
+    assert(ERC20::balance_of(recipient) == balance_recipient + amount, 'ERC20:WRONG BALANCE RECIPIENT');
+
     // STEP 2: Verify that the balance of the sender decreases by the same amount
-    assert(ERC20::balance_of(sender) == sender_balance - amount, 'ERC20:WRONG SENDER BALANCE'); 
+    assert(ERC20::balance_of(sender) == sender_balance - amount, 'ERC20:WRONG SENDER BALANCE');
 
-    // STEP x: several assert functions to check if the logic is valid and if the transfer function has indeed worked properly
-
-    // STEP x: Verify that the total_supply value remains the same as when it was initialized
-
-
-
+    // STEP 3: Verify that the total_supply value remains the same as when it was initialized
+    assert(ERC20::get_total_supply() == total_supply_balance, 'ERC20:WRONG TOTAL SUPPLY');
 }
