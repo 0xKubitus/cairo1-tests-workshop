@@ -151,7 +151,8 @@ mod tests {
         let symbol: felt252 = 'BSC04';
 
 
-        ERC20::constructor(name, symbol, decimals, initial_supply, account)
+        ERC20::constructor(name, symbol, decimals, initial_supply, account);
+
 
 
     }
