@@ -158,7 +158,7 @@ mod tests {
         assert(res_name == name, 'Error => ERC20: Wrong name');
         // assert(res_name == 'anything else than Basecamp_04', 'Error => ERC20: Wrong name'); // this is a test that would fail
 
-        // Let's use get_symbol() now, but in a one-liner:
+        // Let's use get_symbol() now to test the variable "symbol", but in a one-liner:
         assert(ERC20::get_symbol() == symbol, 'Error => ERC20: Wrong symbol');
 
 
