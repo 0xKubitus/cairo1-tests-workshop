@@ -30,22 +30,20 @@ fn setup() -> (ContractAddress, u256) {
 #[test]
 #[available_gas(2000000)]
 fn test_transfer(){
-    let (sender, supply) = setup();
+    let (sender, supply) = setup(); // this declares the result from setup() function as two variables, namely "sender" and "account" 
 
     let recipient: ContractAddress = contract_address_const::<2>(); // make sure to create a second dummy account address here
+    
     let amount: u256 = u256_from_felt252(100);
+    let balance_recipient = ERC20::balance_of(recipient);
+    let sender_balance = ERC20::balance_of(sender);
+    
+    ERC20::transfer(recipient, amount);
 
     // STEP 1: Verify that the amount of 100 has been transferred to the recipient account
-    // // 1st implementation:
-    // ERC20::transfer(recipient, amount);
-    // assert(ERC20::balance_of(recipient) == amount, 'ERC20:WRONG BALANCE RECIPIENT')
-
-    // Another (better) implementation (more secure in case of multiple transfers):
-    let balance_recipient = ERC20::balance_of(recipient);
-    ERC20::transfer(recipient, amount);
-    assert(ERC20::balance_of(recipient) == balance_recipient + amount, 'ERC20:WRONG BALANCE RECIPIENT')
-
+    assert(ERC20::balance_of(recipient) == balance_recipient + amount, 'ERC20:WRONG BALANCE RECIPIENT');     
     // STEP 2: Verify that the balance of the sender decreases by the same amount
+    assert(ERC20::balance_of(sender) == sender_balance - amount, 'ERC20:WRONG SENDER BALANCE'); 
 
     // STEP x: several assert functions to check if the logic is valid and if the transfer function has indeed worked properly
 
