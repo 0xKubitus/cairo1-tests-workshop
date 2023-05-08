@@ -131,7 +131,7 @@ mod ERC20 {
 mod tests {
 
     use starknet::ContractAddress;
-    use starknet::contract_address_const;
+    use starknet::contract_address_const; // library that allows us to initiate a dummy contract address that's useful for testing purposes
 
     // The two below imports are required in order to be able to produce a u256 from a felt 
     use integer::u256;
@@ -161,7 +161,15 @@ mod tests {
         // Let's use get_symbol() now to test the variable "symbol", but in a one-liner:
         assert(ERC20::get_symbol() == symbol, 'Error => ERC20: Wrong symbol');
 
+        // Let's check if the variable "decimals" has been initialized correctly:
+        assert(ERC20::get_decimals() == decimals, 'Error => ERC20: Wrong decimals');
 
+        // Let's check if the variable "total_suply" has been initialized correctly:
+        assert(ERC20::get_total_supply() == initial_supply, 'Error>ERC20: Wrong total_supply'); // ATTENTION: shortstrings are maximum 31 characters long
+
+        // Let's check if the balance of the "account" is equal to the "initial_supply":
+        let accnt_blnce = ERC20::balance_of(account);
+        assert(accnt_blnce == initial_supply, 'accnt_blnce != initial_supply');
     }
 
 }
