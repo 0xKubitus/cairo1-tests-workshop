@@ -1,4 +1,3 @@
-
 use starknet::ContractAddress;
 use starknet::contract_address_const; // library that allows us to initiate a dummy contract address that's useful for testing purposes
 
@@ -27,6 +26,7 @@ fn setup() -> (ContractAddress, u256) {
 }
 
 #[test]
+#[available_gas(2000000)]
 fn test_transfer(){
-
+    let (sender, supply) = setup();
 }
