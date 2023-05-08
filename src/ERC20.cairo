@@ -153,7 +153,9 @@ mod tests {
 
         ERC20::constructor(name, symbol, decimals, initial_supply, account);
 
-
+        let res_name = ERC20::get_name();
+        // assert(res_name == 'whatever', 'Error => ERC20: Wrong name'); // this would make the test fail
+        assert(res_name == name, 'Error => ERC20: Wrong name');
 
     }
 
