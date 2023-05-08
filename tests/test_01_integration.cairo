@@ -1,4 +1,4 @@
-// HOMEWORK Part 2:
+// HOMEWORK Part 2: Integration Testing
 
 use starknet::ContractAddress;
 use starknet::contract_address_const; // library that allows us to initiate a dummy contract address that's useful for testing purposes
@@ -35,14 +35,21 @@ fn test_transfer(){
     let recipient: ContractAddress = contract_address_const::<2>(); // make sure to create a second dummy account address here
     let amount: u256 = u256_from_felt252(100);
 
-    // // One first implementation:
+    // STEP 1: Verify that the amount of 100 has been transferred to the recipient account
+    // // 1st implementation:
     // ERC20::transfer(recipient, amount);
     // assert(ERC20::balance_of(recipient) == amount, 'ERC20:WRONG BALANCE RECIPIENT')
 
-    // Another (better) implementation (more secured in case of multiple transfers):
+    // Another (better) implementation (more secure in case of multiple transfers):
     let balance_recipient = ERC20::balance_of(recipient);
     ERC20::transfer(recipient, amount);
     assert(ERC20::balance_of(recipient) == balance_recipient + amount, 'ERC20:WRONG BALANCE RECIPIENT')
+
+    // STEP 2: Verify that the balance of the sender decreases by the same amount
+
+    // STEP x: several assert functions to check if the logic is valid and if the transfer function has indeed worked properly
+
+    // STEP x: Verify that the total_supply value remains the same as when it was initialized
 
 
 }

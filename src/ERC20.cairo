@@ -127,6 +127,8 @@ mod ERC20 {
     }
 }
 
+// HOMEWORK Part 1: Unit Testing
+
 #[cfg (test)]
 mod tests {
 
