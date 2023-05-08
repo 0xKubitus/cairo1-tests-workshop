@@ -1,3 +1,5 @@
+// HOMEWORK Part 2:
+
 use starknet::ContractAddress;
 use starknet::contract_address_const; // library that allows us to initiate a dummy contract address that's useful for testing purposes
 
@@ -29,4 +31,18 @@ fn setup() -> (ContractAddress, u256) {
 #[available_gas(2000000)]
 fn test_transfer(){
     let (sender, supply) = setup();
+
+    let recipient: ContractAddress = contract_address_const::<2>(); // make sure to create a second dummy account address here
+    let amount: u256 = u256_from_felt252(100);
+
+    // // One first implementation:
+    // ERC20::transfer(recipient, amount);
+    // assert(ERC20::balance_of(recipient) == amount, 'ERC20:WRONG BALANCE RECIPIENT')
+
+    // Another (better) implementation (more secured in case of multiple transfers):
+    let balance_recipient = ERC20::balance_of(recipient);
+    ERC20::transfer(recipient, amount);
+    assert(ERC20::balance_of(recipient) == balance_recipient + amount, 'ERC20:WRONG BALANCE RECIPIENT')
+
+
 }
