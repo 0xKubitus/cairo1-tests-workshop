@@ -4,6 +4,10 @@ mod ERC20 {
     use starknet::get_caller_address;
     use starknet::contract_address_const;
     use starknet::ContractAddress;
+ 
+    // add the below line if you get the following error message while running: `cairo-test --starknet .` => error: Plugin diagnostic: Method `is_zero` not found on type "core::starknet::contract_address::ContractAddress".
+    // (might be the case if you are using cairo version 1.0.0-alpha.7)
+    use starknet::contract_address::ContractAddressZeroable; 
 
     struct Storage {
         name: felt252,
